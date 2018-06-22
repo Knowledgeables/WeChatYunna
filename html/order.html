@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发起工单</title>
+    <script src="../js/api.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/utils.js"></script>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/order.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="header">
+    <div id="tab1" class="tab selected">基本信息</div>
+    <div id="tab2" class="tab">添加附件</div>
+</div>
+<div class="container">
+    <div class="left">
+        <div class="left_company">
+            <div>
+                <span class="company_box_name">请求企业</span>
+                <input class="company_box_content sp_reqCompany" readonly="readonly"
+                       placeholder="自己企业的名称"/>
+                <img class="ic_req_company" src="../image/ic_enter.png"/>
+            </div>
+            <div>
+                <span class="company_box_name">请求人</span>
+                <input class="company_box_content sp_reqPerson" readonly="readonly"
+                       placeholder="自己的名字电话"/>
+                <img class="ic_req_person" src="../image/ic_enter.png"/>
+            </div>
+            <div>
+                <span class="company_box_name">服务企业</span>
+                <input class="company_box_content sp_servCompany" readonly="readonly"
+                       placeholder="请选择(必选)"/>
+                <img class="ic_serv_company" src="../image/ic_enter.png"/>
+            </div>
+        </div>
+        <div class="left_sla">
+            <div class="left_sla_line1">
+                <span class="sla_line1_title">紧急程度(必选)</span>
+                <div style="width: calc(100%/2);text-align: right;">
+                    <ul class="sla_box">
+                        <!--
+                                                <li class="li_item">T1</li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+            <div class="left_sla_line2">
+                <span class="sla_line2_title" style="width:calc(100%/3)">SLA(必填)</span>
+                <input class="sla_day" placeholder="请输入"/>天
+                <input class="sla_time" placeholder="请输入"/>小时
+            </div>
+        </div>
+        <div class="left_detail">
+            <div class="abstract_describe">
+                <p style="line-height:.8rem">简要描述</p>
+                <textarea class="abs_describe" rows="3" cols="20"
+                          placeholder="请在此输入(必填)"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="imageBox">
+            <!--<div class="imageShowDiv">
+                <img class="imageShow" src="../image/ic_girl.png"/>
+                <button class="imageDel" type="button"
+                        onclick="delClick(this)"></button>
+            </div>-->
+            <div class="chooseDiv">
+                <button class="captureBtn" type="button" onclick="chooseClick(this)"></button>
+                <input class="captureInput" style="display: none" type="file"
+                       accept="image/png, image/jpeg , image/jpg"
+                       onchange="handleFiles(this,this.files)"/>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button onclick="senWork()">发起</button>
+    </div>
+    <div class="person">
+        <img class="person_header" src="../image/ic_user_header.png" onclick="userInfoClick()">
+    </div>
+</div>
+</body>
+<script>
+    let tab1 = $("#tab1");
+    let tab2 = $("#tab2");
+    let left = $(".left");
+    let right = $(".right");
+    let project = $(".left_project");
+    let reqCompany = $(".sp_reqCompany");
+    let reqPerson = $(".sp_reqPerson");
+    let servCompany = $(".sp_servCompany");
+    let icReqCompany = $(".ic_req_company");
+    let icReqPerson = $(".ic_req_person");
+    let icServCompany = $(".ic_serv_company");
+    let slaDay = $(".sla_day");
+    let slaTime = $(".sla_time");
+    let sla_box = $(".sla_box");
+    let absDescribe = $(".abs_describe");
+    let thisReqCompanyData;//请求公司信息
+    let thisReqPersonData;//请求用户信息
+    let thisServCompanyData;//服务企业信息
+    let thisEmployeeInfo;//当前企业信息
+    let thisSlaInfo;//当前sla信息
+    /**
+     * 页面加载事件
+     */
+    window.onload = function () {
+        left.show();
+        right.hide();
+        project.hide();
+        thisEmployeeInfo = cache.getEmployeeInfo();
+        console.log("当前员工信息");
+        console.log(thisEmployeeInfo);
+        /**
+         * 当前登陆用户为服务商用户的时候
+         */
+        if (cache.getCompanyType() === "service") {
+            icServCompany.hide();//设置服务企业箭头
+            servCompany.val(thisEmployeeInfo.companyName);//设置服务企业为当前企业
+            servCompany.attr('disabled', true);//禁止服务企业点击事件
+            thisReqCompanyData = JSON.parse(sessionStorage.getItem("reqCompany"));
+            console.log("thisReqCompanyData");
+            console.log(thisReqCompanyData);
+            if (thisReqCompanyData != null) {
+                console.log(thisReqCompanyData.serverName);//企业名称
+                reqCompany.val(thisReqCompanyData.serverName);//设置企业信息
+            }
+            thisReqPersonData = JSON.parse(sessionStorage.getItem("reqPerson"));
+            console.log("thisReqPersonData");
+            console.log(thisReqPersonData);
+            if (thisReqPersonData != null) {
+                console.log(thisReqPersonData.name);//用户名
+                console.log(thisReqPersonData.mobilePhone);//手机号
+                let tempName = (thisReqPersonData.name == null ? "" : thisReqPersonData.name) + "-" + (thisReqPersonData.mobilePhone == null ? "" : thisReqPersonData.mobilePhone);
+                reqPerson.val(tempName);//设置请求人信息
+            } else {
+                reqPerson.val("");//设置请求人信息
+            }
+
+        }
+        else {
+            /**
+             * 当前登陆用户为业主用户时候
+             */
+            icReqCompany.hide();//设置请求企业图标隐藏
+            reqCompany.val(thisEmployeeInfo.companyName);//设置服务企业为当前企业
+            reqCompany.attr('disabled', true);//禁止服务企业点击事件
+            icReqPerson.hide();
+            reqPerson.val(thisEmployeeInfo.name);//设置服务企业为当前企业
+            reqPerson.attr('disabled', true);//禁止服务企业点击事件
+            thisServCompanyData = JSON.parse(sessionStorage.getItem("servCompany"));
+            console.log("thisServCompanyData");
+            console.log(thisServCompanyData);
+            if (thisServCompanyData != null) {
+                console.log(thisServCompanyData.serverName);//企业名称
+                servCompany.val(thisServCompanyData.serverName);//设置企业信息
+            }
+        }
+        request.reqSlaMinute(function (companyList) {
+            $(companyList).each(function (i, item) {
+                sla_box.append("<li class=\"li_item\" id=" + JSON.stringify(item) + " onclick='liClick(this)'>" + item.levelName + "</li>");
+            });
+        });
+    };
+    tab1.click(function () {
+        tab1.addClass("selected");
+        tab2.removeClass("selected");
+        left.show();
+        right.hide();
+    });
+    tab2.click(function () {
+        tab2.addClass("selected");
+        tab1.removeClass("selected");
+        right.show();
+        left.hide();
+    });
+
+    sla_box.children().click(function (e) {
+        $("li").each(function () {
+            $(this).removeClass("li_item_selected");
+        });
+        $(this).addClass("li_item_selected");
+    });
+    reqCompany.click(function () {
+        sessionStorage.removeItem("reqPerson");
+        thisReqPersonData = null;
+        let target = cache.getCompanyType() === "service" ? "req" : "serv";
+        window.location = "reqCompany.html?type=" + target;
+    });
+    reqPerson.click(function () {
+        if (thisReqCompanyData === null || thisReqCompanyData === null) {
+            utils.Toast(undefined, "请先选择请求企业", undefined);
+            return;
+        }
+        window.location = "reqPerson.html";
+    });
+    servCompany.click(function () {
+        let target = cache.getCompanyType() === "service" ? "req" : "serv";
+        window.location = "reqCompany.html?type=" + target;
+    });
+
+    //sla点击事件
+    function liClick(item) {
+        thisSlaInfo = JSON.parse($(item).attr("id"));
+        console.log("当前SLa信息");
+        console.log(thisSlaInfo);
+        slaDay.val(thisSlaInfo.completeDay);
+        slaTime.val(thisSlaInfo.completeHour);
+        $("li").each(function () {
+            $(this).removeClass("li_item_selected");
+        });
+        $(item).addClass("li_item_selected");
+    }
+
+    //点击选择图片
+    function chooseClick(item) {
+        return $(item).parent(".chooseDiv").children(".captureInput").click();
+    }
+
+    //点击删除图片
+    function delClick(item) {
+        $(item).parent(".imageShowDiv").remove();
+    }
+
+    //获取图片并显示
+    function handleFiles(item, files) {
+        let that = $(item);
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+                utils.Toast("", "不是有效的图片文件", "");
+                return;
+            }
+            that.parent(".chooseDiv").before("<div class=\"imageShowDiv\">\n" +
+                "                <img class=\"imageShow\" />\n" +
+                "                <button class=\"imageDel\" type=\"button\"\n" +
+                "                        onclick=\"delClick(this)\"></button>\n" +
+                "            </div>");
+            let image = $(".chooseDiv").prev().children(".imageShow");
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                image.attr("src", e.target.result);
+            };
+            reader.readAsDataURL(file);
+            console.log("图片的路径" + image[0].src);
+            request.upLoadFile(cache.getCompanyType(), cache.getCompanyInfo().versionCode, cache.getCompanyInfo().companyCode, file, function (result) {
+                console.log(JSON.stringify(result));
+                console.log(result.path);
+                image.attr("id", JSON.stringify(result));
+            });
+        }
+    }
+
+    /* //获取全部图片列表
+     function getAllImage2Upload() {
+         let images = {
+             "item_attachName": "",
+             "item_path": "",
+             "item_size": ""
+         };
+         $(".imageShow").each(function (index, item) {
+             console.log("条目");
+             console.log(item.id);
+             let attachName = JSON.parse(item.id).attachName;
+             let path = JSON.parse(item.id).path;
+             let size = JSON.parse(item.id).size;
+             images["item_attachName"] = images.item_attachName + "," + attachName;
+             images["item_path"] = images.item_path + "," + path;
+             images["item_size"] = images.item_size + "," + size;
+         });
+         return images;
+     }*/
+
+    function senWork() {
+        let orderInfo = {
+            title: null,
+            ownerCode: null,
+            sendUser: null,
+            serviceProviderCode: null,
+            levelId: null,
+            days: null,
+            hours: null,
+            tempCategoryId: null,
+            outsourceFlag: "0",
+            filenames: null,
+            attachPath: null,
+            attachSize: null,
+            currentUserId: null
+        };
+        if (cache.getCompanyType() === "service") {
+            if (thisReqCompanyData == null || thisReqCompanyData === undefined) {
+                utils.Toast("", "请选择业主单位", "");
+                return;
+            }
+            if (thisReqPersonData == null || thisReqPersonData === undefined) {
+                utils.Toast("", "请选择发起人", "");
+                return;
+            }
+            orderInfo["ownerCode"] = thisReqCompanyData.companyCode;
+            orderInfo["sendUser"] = thisReqPersonData.employeeId;
+        } else {
+            if (thisServCompanyData == null || thisServCompanyData === undefined) {
+                utils.Toast("", "请选择服务商企业", "");
+                return;
+            }
+            orderInfo["serviceProviderCode"] = thisServCompanyData.companyCode;
+            orderInfo["outsourceFlag"] = "0"
+        }
+        if (thisEmployeeInfo == null || thisEmployeeInfo === undefined) {
+            utils.Toast("", "当前登陆失效", "");
+            return location.href = "login.html";
+        }
+        if (thisSlaInfo == null || thisSlaInfo === undefined) {
+            utils.Toast("", "请选择sla等级", "");
+            return;
+        }
+        if (absDescribe == null || absDescribe.val() === null || absDescribe.val().length === 0) {
+            utils.Toast("", "请填写概要描述", "");
+            return;
+        }
+        $(".imageShow").each(function (index, item) {
+            console.log("条目");
+            console.log(item.id);
+            let attachName = JSON.parse(item.id).attachName;
+            let path = JSON.parse(item.id).path;
+            let size = JSON.parse(item.id).size;
+            if (index === 0) {
+                orderInfo["filenames"] = attachName;
+                orderInfo["attachPath"] = path;
+                orderInfo["attachSize"] = size;
+            } else {
+                orderInfo["filenames"] = orderInfo["filenames"] + "," + attachName;
+                orderInfo["attachPath"] = orderInfo["attachPath"] + "," + path;
+                orderInfo["attachSize"] = orderInfo["attachSize"] + "," + size;
+            }
+        });
+        orderInfo["levelId"] = thisSlaInfo.tempId;
+        orderInfo["days"] = thisSlaInfo.completeDay;
+        orderInfo["hours"] = thisSlaInfo.completeHour;
+        orderInfo["tempCategoryId"] = thisSlaInfo.tempCategoryId;
+        orderInfo["currentUserId"] = thisEmployeeInfo.employeeId;
+        orderInfo["title"] = absDescribe.val();
+        request.sendWokOrder(cache.getCompanyType(), orderInfo, function (result) {
+            utils.Toast("", "工单发送成功！", "");
+            sessionStorage.clear();
+            location.replace("order.html")
+        });
+        return orderInfo;
+    }
+
+
+    function userInfoClick() {
+        window.location.href = "user.html";
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+body {
+    background: rgba(237, 240, 245, 1);
+}
+
+.container {
+    background-color: white;
+}
+
+.item {
+    height: 1rem;
+    background-color: white;
+    width: 92%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item_icon {
+    height: .7rem;
+    width: .7rem;
+    line-height: .7rem;
+    font-size: .5rem;
+    border-radius: 50%;
+    position: absolute;
+    color: white;
+    text-align: center;
+    box-shadow: 1px 1px 0.5px #689DF8;
+    overflow: hidden;
+    float: left;
+}
+
+.item_center {
+    padding-left: .2rem;
+    float: left;
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+    margin-left: .7rem;
+}
+
+.item_user_name {
+    font-size: .34rem;
+    font-family: PingFang-SC-Medium, serif;
+    color: rgba(51, 51, 51, 1);
+}
+
+.item_user_phone {
+    font-size: .34rem;
+    font-family: PingFang-SC-Medium, serif;
+    color: #666666;
+}

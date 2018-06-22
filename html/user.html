@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>当前账户</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/user.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <script src="../js/api.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/utils.js"></script>
+</head>
+<body class="container">
+<div class="item_container ">
+    <div class="item">
+        <span class="title">姓名：</span>
+        <span id="userName" class="content">姓名：</span>
+    </div>
+</div>
+<div class="item_container">
+    <div class="item">
+        <span class="title">手机：</span>
+        <span id="userPhone" class="content">姓名：</span>
+    </div>
+</div>
+<button type="button" class="logOut" onclick="logOutClick()">退出登陆</button>
+<div class="bottom">
+    <img class="bottom_back" src="../image/ic_back.png" onclick="goBack()">
+</div>
+</body>
+<script>
+    let currentEmployeeInfo = cache.getEmployeeInfo();
+    window.onload =
+        function () {
+            console.log("公司信息");
+            console.log(currentEmployeeInfo);
+            let name = currentEmployeeInfo.name == null ? "" : currentEmployeeInfo.name;
+            let mobilePhone = currentEmployeeInfo.mobilePhone == null ? "" : currentEmployeeInfo.mobilePhone;
+            $("#userName").html(name);
+            $("#userPhone").html(mobilePhone);
+        };
+
+    function logOutClick() {
+        sessionStorage.clear();
+        localStorage.clear();
+        location.replace("login.html")
+    }
+
+    function goBack() {
+        window.history.back();
+    }
+</script>
+</html>

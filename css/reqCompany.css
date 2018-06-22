@@ -1,0 +1,51 @@
+body {
+    background: rgba(237, 240, 245, 1);
+}
+
+.container {
+    background-color: white;
+}
+
+.item {
+    height: 1rem;
+    background-color: white;
+    width: 92%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item_icon {
+    height: .7rem;
+    width: .7rem;
+    line-height: .7rem;
+    font-size: .5rem;
+    border-radius: 50%;
+    position: absolute;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    box-shadow: 1px 1px 0.5px #888888;
+    overflow: hidden;
+    float: left;
+}
+
+.item_center {
+    padding-left: .2rem;
+    float: left;
+    width: 88%;
+    margin-left: .7rem;
+}
+
+.item_center span {
+    font-size: .34rem;
+    color: rgba(51, 51, 51, 1);
+}
+
+.item_type {
+    width: 1.43rem;
+    height: .43rem;
+}
+

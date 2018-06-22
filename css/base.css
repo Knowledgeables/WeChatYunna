@@ -1,0 +1,46 @@
+* {
+    font-weight: inherit;
+    font-style: inherit;
+    text-decoration: none;
+    list-style: none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: PingFang-SC-Regular, serif;
+}
+
+body {
+    background: rgba(255, 255, 255, 1);
+}
+
+img {
+    display: block;
+
+}
+
+div {
+    display: block;
+    width: 100%;
+}
+
+.hide {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*文本不换行，这样超出一行的部分被截取，显示...*/
+    white-space: nowrap;
+}
+::-moz-placeholder {
+    color: rgba(179, 179, 179, 1);
+    font-size: .3rem;
+}
+
+::-webkit-input-placeholder {
+    color: rgba(179, 179, 179, 1);
+    font-size: .3rem;
+}
+
+:-ms-input-placeholder {
+    color: rgba(179, 179, 179, 1);
+    font-size: .3rem;
+}

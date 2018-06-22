@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择请求人</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/reqPerson.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <script src="../js/api.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/utils.js"></script>
+</head>
+<body>
+<div class="container">
+    <!--<div class="item">
+        <div class="item_icon">
+            <img src="../image/icon_header_default.png" />
+        </div>
+        <div class="item_center">
+            <span class="item_user_name">" + item.name + "</span>
+            <span class="item_user_phone">" + item.mobilePhone + "</span>
+        </div>
+    </div>-->
+</div>
+</body>
+<script>
+    window.onload =
+        function () {
+            let reqCompany_data = JSON.parse(sessionStorage.getItem("reqCompany"));
+            let thisCompanyData = cache.getEmployeeInfo();
+            console.log("reqCompany_data");
+            console.log(reqCompany_data);
+            console.log("thisCompanyData");
+            console.log(thisCompanyData);
+            request.reqOrderPerson(reqCompany_data.companyCode, thisCompanyData.serviceProviderCode, function (companyList) {
+                $(companyList).each(function (i, item) {
+                    console.log(item.avatar == null);
+                    let imageSrc = item.avatar == null ? "../image/icon_header_default.png" : item.avatar;
+                    $(".container").append("<div class=\"item\"  id=" + JSON.stringify(item) + " onclick='itemClick(this)'>\n" +
+                        "        <div class=\"item_icon\">\n" +
+                        "            <img src=" + imageSrc + "  width='100%' height='100%'/>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"item_center\">\n" +
+                        "            <span class=\"item_user_name\">" + item.name + "</span>\n" +
+                        "            <span class=\"item_user_phone\">" + item.mobilePhone + "</span>\n" +
+                        "        </div>\n" +
+                        "    </div>");
+                });
+            });
+
+        };
+
+
+    function itemClick(item) {
+        let data = $(item).attr("id");
+        sessionStorage.setItem("reqPerson", data);
+        window.location.href = "order.html";
+    }
+
+</script>
+
+</html>

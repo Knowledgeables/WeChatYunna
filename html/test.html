@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/api.js"></script>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<button class="save" onclick="clickSave()">点击存储</button>
+<button class="read" onclick="clickRead()">点击读取</button>
+
+</body>
+<script>
+    let  btnRead=$(".read");
+    let  btnSave=$(".save");
+    window.onload = function () {
+        btnSave.append("--nihao加载")
+
+    };
+
+    function clickSave() {
+        localStorage.setItem("name", "你好我叫陈滨");
+    }
+
+    function clickRead() {
+        btnRead.append(localStorage.getItem("name"));
+
+    }
+</script>
+</html>

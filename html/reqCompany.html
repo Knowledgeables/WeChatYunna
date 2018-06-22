@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择请求企业</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/reqCompany.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/utils.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- <div class=\"item\">
+         <div class=\"item_icon\">item.serverName.substring(0, 1)</div>
+         <div class=\"item_center\">
+             <span>" + item.serverName + "</span>
+             <img id=\"+item_type+\" class=\"item_type\" src=\"..\\image\\icon_company_hyfws.png\">
+         </div>-->
+</div>
+</body>
+<script>
+    let currentType;
+    window.onload = function () {
+        currentType = utils.GetQueryString("type");
+        console.log("当前类型");
+        console.log(currentType);
+        request.reqCompanyInfo("", function (companyList) {
+            $(companyList).each(function (i, item) {
+                $(".container").append("  <div class=\"item\"  id=" + JSON.stringify(item) + " onclick='itemClick(this)'>\n" +
+                    "        <div class=\"item_icon\">\n" + item.serverName.substring(0, 1) +
+                    "        </div>\n" +
+                    "        <div class=\"item_center\">\n" +
+                    "            <span>" + item.serverName + "</span>\n" +
+                    "            <img id=\"+item_type+\" class=\"item_type\" src=\"..\\image\\icon_company_hyfws.png\">\n" +
+                    "        </div>\n" +
+                    "    </div>");
+                var icon = $(".item_icon");
+                var iconType = $(".item_type");
+                var companyType = cache.getCompanyType();
+                if ("1" === (item.bindFlag)) {
+                    if ("owner" === (companyType)) {
+                        iconType.attr("src", "../image/icon_company_hyfws.png");
+                    } else {
+                        iconType.attr("src", "../image/icon_company_hyyz.png");
+                    }
+                    icon.css("background", "#a9db34");
+                } else if ("2" === (item.bindFlag)) {
+                    if ("owner" === (companyType)) {
+                        iconType.attr("src", "../image/icon_company_zjfws.png");
+                    } else {
+                        iconType.attr("src", "../image/icon_company_zjyz.png");
+                    }
+                    icon.css("background", "#ff7d8c");
+                } else if ("3" === (item.bindFlag)) {
+                    iconType.attr("src", "../image/icon_company_zsqy.png");
+                    icon.css("background", "#5cc9ff");
+                }
+            });
+        });
+
+    };
+
+    function itemClick(item) {
+        let data = $(item).attr("id");
+        if (cache.getCompanyType() === "service") {
+            sessionStorage.setItem("reqCompany", data);
+        } else {
+            sessionStorage.setItem("servCompany", data);
+        }
+        window.location.href = "order.html";
+    }
+
+</script>
+
+</html>

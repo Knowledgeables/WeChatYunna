@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/api.js"></script>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="header">
+    <img src="../image/logo.png">
+</div>
+<div>
+    <div class="company_type">
+        <span id="service" class="company_btn company_select">服务商</span>
+        <span id="owner" class="company_btn">业主</span>
+    </div>
+    <div class="account">
+        <img src="../image/ic_account.png"/>
+        <input id="userName" type="number" max="11" min="11" maxlength="11" minlength="11"
+               placeholder="账号"/>
+    </div>
+    <div class="account" style="margin-top: .35rem">
+        <img src="../image/ic_password.png"/>
+        <input id="userPwd" type="password" max="20" min="6" maxlength="20" minlength="6"
+               placeholder="密码"/>
+    </div>
+    <div>
+        <button type="submit" class="login">登录</button>
+    </div>
+    <div><span class="forget" onclick="window.location.href='forget_pass.html'">忘记密码?</span>
+    </div>
+</div>
+<script>
+    let sp_service = $("#service");
+    let sp_owner = $("#owner");
+    let in_userName = $("#userName");
+    let in_userPwd = $("#userPwd");
+    window.onload = function () {
+        localStorage.clear();
+        refreshCurrentSelectCompny();
+    };
+
+    /**
+     * 设置当前选中的公司的样式
+     */
+    function refreshCurrentSelectCompny() {
+        switch (cache.getCompanyType()) {
+            case "service":
+                sp_service.addClass("company_select");
+                sp_owner.removeClass("company_select");
+                let service = cache.getServiceUserInfo();
+                if (service != null) {
+                    in_userName.val(service.userName == null ? "" : service.userName);
+                    in_userPwd.val(service.password == null ? "" : service.password);
+                } else {
+                    in_userName.val("");
+                    in_userPwd.val("");
+                }
+                break;
+            case "owner":
+                sp_owner.addClass("company_select");
+                sp_service.removeClass("company_select");
+                let owner = cache.getOwnerUserInfo();
+                if (owner != null) {
+                    in_userName.val(owner.userName == null ? "" : owner.userName);
+                    in_userPwd.val(owner.password == null ? "" : owner.password);
+                } else {
+                    in_userName.val("");
+                    in_userPwd.val("");
+                }
+                break;
+        }
+    }
+
+    $(".login").on("click", function () {
+        if (!utils.IsPhone(in_userName.val())) {
+            utils.Toast(undefined, "手机号码格式不正确", false);
+            return;
+        }
+        if (!utils.ValidatePwd(in_userPwd.val())) {
+            utils.Toast(undefined, "密码格式不正确", false);
+            return;
+        }
+        request.doLogin(in_userName.val(), in_userPwd.val())
+    });
+
+    sp_service.on('click', function () {
+        cache.setCompanyServiceSelcted();
+        refreshCurrentSelectCompny();
+    });
+    sp_owner.on('click', function () {
+        cache.setCompanyOwnerSelected();
+        refreshCurrentSelectCompny();
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+.header {
+    display: flex;
+    width: 100%;
+    height: .9rem;
+    background: rgba(255, 255, 255, 1);
+}
+
+body {
+    background: rgba(237, 240, 245, 1);
+}
+
+.tab {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: .9rem;
+    font-family: PingFang-SC-Regular, serif;
+    color: rgba(102, 102, 102, 1);
+    background: rgba(255, 255, 255, 1);
+    padding-bottom: .05rem;
+    box-shadow: 1px 1px 1px rgb(179, 179, 179);
+}
+
+.selected {
+    border-bottom: .04rem solid rgba(104, 157, 248, 1);
+    color: rgba(104, 157, 248, 1);
+}
+
+.left {
+    background: rgba(245, 247, 250, 1);
+    padding-top: .15rem;
+}
+
+input:disabled {
+    border: 1px solid white;
+    background-color: white;
+}
+
+.left_company {
+    margin-top: .2rem;
+    height: 3rem;
+    background: rgba(255, 255, 255, 1);
+    padding-bottom: .05rem;
+    box-shadow: 1px 1px 1px rgb(179, 179, 179);
+}
+
+.left_company div {
+    height: 1rem;
+    width: 94%;
+    margin-left: .3rem;
+    padding-right: .1rem;
+    background: rgba(255, 255, 255, 1);
+    border-bottom: .01rem solid rgba(237, 237, 237, 1);
+    overflow: hidden;
+    display: flex; /*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items: center; /*指定垂直居中*/
+}
+
+.company_box_name {
+    width: 20%;
+    color: rgba(51, 51, 51, 1);
+    font-family: PingFang-SC-Medium, serif;
+    font-size: .3rem;
+}
+
+.company_box_content {
+    display: inline-block;
+    width: 76%;
+    text-align: right;
+    padding-right: .1rem;
+}
+
+.left_sla {
+    margin-top: .2rem;
+    background: rgba(255, 255, 255, 1);
+    padding-bottom: .05rem;
+    box-shadow: 1px 1px 1px rgb(179, 179, 179);
+
+}
+
+.left_sla_line1 {
+    width: 90%;
+    margin-top: .2rem;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(255, 255, 255, 1);
+    height: 1rem;
+    display: flex; /*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items: center; /*指定垂直居中*/
+    border-bottom: .01rem solid rgba(237, 237, 237, 1);
+}
+
+.sla_line1_title {
+    width: 50%;
+    display: inline-block;
+}
+
+.sla_box {
+    display: inline-block;
+    word-break: keep-all; /* 不换行 */
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+    list-style: none;
+    border-width: medium;
+    border-top: .02rem solid rgba(104, 157, 248, 1);
+    border-bottom: .02rem solid rgba(104, 157, 248, 1);
+    border-right: .02rem solid rgba(104, 157, 248, 1);
+    border-left: .02rem solid rgba(104, 157, 248, 1);
+    border-radius: .1rem;
+}
+
+.li_item {
+    float: left;
+    width: .8rem;
+    text-align: center;
+    word-break: keep-all; /* 不换行 */
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+    color: rgba(104, 157, 248, 1);
+    background: rgba(255, 255, 255, 1);
+    border-left: .01rem solid rgba(104, 157, 248, 1);
+    border-right: .01rem solid rgba(104, 157, 248, 1);
+}
+
+.li_item_selected {
+    float: left;
+    width: .8rem;
+    text-align: center;
+    word-break: keep-all; /* 不换行 */
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+    background: rgba(104, 157, 248, 1);
+    color: rgba(255, 255, 255, 1);
+    border-left: .01rem solid rgba(104, 157, 248, 1);
+    border-right: .01rem solid rgba(104, 157, 248, 1);
+}
+
+.sla_box li:first-child {
+    border-right: 0rem solid rgba(104, 157, 248, 1);
+}
+
+.sla_box li:last-child {
+    border-right: 0rem solid rgba(104, 157, 248, 1);
+}
+
+.left_sla_line2 {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(255, 255, 255, 1);
+    height: 1rem;
+    display: flex; /*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items: center; /*指定垂直居中*/
+    border-bottom: .01rem solid rgba(237, 237, 237, 1);
+}
+
+.left_sla_line2 input {
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+.left_detail {
+    margin-top: .2rem;
+    height: 2rem;
+    background: rgba(255, 255, 255, 1);
+    padding-bottom: .05rem;
+    box-shadow: 1px 1px 1px rgb(179, 179, 179);
+}
+
+.abstract_describe {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2rem;
+}
+
+.abstract_describe p {
+    font-size: .3rem;
+    font-family: PingFang-SC-Medium, serif;
+    color: rgba(51, 51, 51, 1);
+    line-height: .8rem;
+}
+
+.abs_describe {
+    height: 1rem;
+    width: 100%;
+    line-break: auto;
+}
+
+.footer {
+    height: 1.3rem;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex; /*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items: center; /*指定垂直居中*/
+    position: absolute;
+    bottom: 0; /* 关键 */
+    left: 0; /* IE下一定要记得 */
+}
+
+.footer button {
+    height: 1rem;
+    background: rgba(104, 157, 248, 1);
+    border-radius: .1rem;
+    box-shadow: .05rem 0 .05rem rgba(104, 157, 248, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    font-size: .38rem;
+    font-family: PingFang-SC-Bold, serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+/*.sla_box li:last-child {
+    border-right: .01rem solid rgba(104, 157, 248, 1);
+    border-top: .01rem solid rgba(104, 157, 248, 1);
+    border-bottom: .01rem solid rgba(104, 157, 248, 1);
+    border-radius: .1rem;
+    border-left: 0;
+}
+
+.sla_box li:first-child {
+    border-left: .01rem solid rgba(104, 157, 248, 1);
+    border-top: .01rem solid rgba(104, 157, 248, 1);
+    border-bottom: .01rem solid rgba(104, 157, 248, 1);
+    border-radius: .1rem;
+    border-right: 0;
+}*/
+
+.person {
+    width: 96%;
+    height: 2.2rem;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: center; /*指定垂直居中*/
+    z-index: 9999;
+    position: absolute;
+    bottom: 1.3rem; /* 关键 */
+    padding-right: .3rem;
+}
+
+.person_header {
+    width: 1rem;
+    float: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    background-color: rgba(237, 240, 245, 1);
+    padding-top: .15rem;
+    position: relative;
+
+}
+
+.imageBox {
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-left: 5%;
+}
+
+.chooseDiv {
+    width: 28%;
+    height: 30vw;
+    float: left;
+    margin-top: .2rem;
+    margin-right: 5%;
+}
+
+.captureBtn {
+    width: 100%;
+    height: 30vw;
+    background-color: transparent;
+    background-image: url("../image/ic_photo.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 100%;
+    color: white;
+}
+
+.imageShowDiv {
+    margin-top: .2rem;
+    width: 28%;
+    height: 30vw;
+    float: left;
+    margin-right: 5%;
+    position: relative;
+}
+
+.imageShow {
+    width: 100%;
+    height: 30vw;
+    background-color: transparent;
+    color: white;
+}
+
+.imageDel {
+    width: .45rem;
+    height: .45rem;
+    position: absolute;
+    bottom: 90%;
+    left: 90%;
+    background-color: transparent;
+    background-image: url("../image/ic_del.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+
+
