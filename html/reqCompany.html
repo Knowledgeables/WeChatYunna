@@ -33,34 +33,43 @@
         console.log(currentType);
         request.reqCompanyInfo("", function (companyList) {
             $(companyList).each(function (i, item) {
-                $(".container").append("  <div class=\"item\"  id=" + JSON.stringify(item) + " onclick='itemClick(this)'>\n" +
+                let itemIndex = "item" + i;
+                $(".container").append("  <div class=\"item\"  id=" + itemIndex + "   data-content=" + JSON.stringify(item) + "  onclick='itemClick(this)'>\n" +
                     "        <div class=\"item_icon\">\n" + item.serverName.substring(0, 1) +
                     "        </div>\n" +
                     "        <div class=\"item_center\">\n" +
                     "            <span>" + item.serverName + "</span>\n" +
-                    "            <img id=\"+item_type+\" class=\"item_type\" src=\"..\\image\\icon_company_hyfws.png\">\n" +
+                    "            <img  class=\"item_type\" src=\"..\\image\\icon_company_hyfws.png\">\n" +
                     "        </div>\n" +
                     "    </div>");
-                var icon = $(".item_icon");
-                var iconType = $(".item_type");
-                var companyType = cache.getCompanyType();
-                if ("1" === (item.bindFlag)) {
-                    if ("owner" === (companyType)) {
+                let thisItem = $(`#${itemIndex}`);
+                let icon = thisItem.children(".item_icon");
+                let iconType = thisItem.children(".item_center").children(".item_type");
+                let companyType = cache.getCompanyType();
+                if ("1" === item.bindFlag) {
+                    console.log("item.bindFlag==1");
+                    if ("owner" === companyType) {
+                        console.log("好友服务商");
                         iconType.attr("src", "../image/icon_company_hyfws.png");
                     } else {
+                        console.log("好友业主");
                         iconType.attr("src", "../image/icon_company_hyyz.png");
                     }
-                    icon.css("background", "#a9db34");
-                } else if ("2" === (item.bindFlag)) {
-                    if ("owner" === (companyType)) {
+                    icon.css("background-color", "#a9db34");
+                } else if ("2" === item.bindFlag) {
+                    console.log("item.bindFlag==2");
+                    if ("owner" === companyType) {
+                        console.log("自建服务商");
                         iconType.attr("src", "../image/icon_company_zjfws.png");
                     } else {
+                        console.log("自建业主");
                         iconType.attr("src", "../image/icon_company_zjyz.png");
                     }
-                    icon.css("background", "#ff7d8c");
-                } else if ("3" === (item.bindFlag)) {
+                    icon.css("background-color", "#ff7d8c");
+                } else if ("3" === item.bindFlag) {
+                    console.log("自身企业");
                     iconType.attr("src", "../image/icon_company_zsqy.png");
-                    icon.css("background", "#5cc9ff");
+                    icon.css("background-color", "#5cc9ff");
                 }
             });
         });
@@ -68,7 +77,7 @@
     };
 
     function itemClick(item) {
-        let data = $(item).attr("id");
+        let data = $(item).attr("data-content");
         if (cache.getCompanyType() === "service") {
             sessionStorage.setItem("reqCompany", data);
         } else {

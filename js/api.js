@@ -1,6 +1,7 @@
 var BaseUrl = "http://192.168.15.90:8080/";
-//var BaseUrl = "http://192.168.10.13:8090/";
 
+//var BaseUrl = "http://192.168.10.13:8090/";
+//http://192.168.10.16:8090
 var MIDDLE = BaseUrl + "MiddleServer/";
 //服务商地址
 var SERVER = BaseUrl + "AppServiceProvider/";
@@ -23,7 +24,6 @@ var OWNER_QUERY_COMPANY_URL = OWNER + "queryAppServerInfo.htm";
 
 //服务商 工单 选择发起人
 var SERVICE_QUERY_PERSON_URL = SERVER + "queryAppSynEmployeeRebuild.htm";
-
 
 //SLA协议
 var SERVICE_MINUTE_URL = SERVER + "getAppTotalMinute.htm";

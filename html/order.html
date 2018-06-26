@@ -62,7 +62,8 @@
         <div class="left_detail">
             <div class="abstract_describe">
                 <p style="line-height:.8rem">简要描述</p>
-                <textarea class="abs_describe" rows="3" cols="20"
+                <textarea onclick="textareaInput()" autofocus class="abs_describe" rows="3"
+                          cols="20" maxlength="50"
                           placeholder="请在此输入(必填)"></textarea>
             </div>
         </div>
@@ -146,7 +147,9 @@
             } else {
                 reqPerson.val("");//设置请求人信息
             }
-
+            absDescribe.focus(function () {
+                absDescribe.css("background-color", "#EDF0F5");
+            });
         }
         else {
             /**
@@ -232,6 +235,11 @@
         $(item).parent(".imageShowDiv").remove();
     }
 
+    function textareaInput() {
+        console.log("dianji")
+        absDescribe.focus();
+    }
+
     //获取图片并显示
     function handleFiles(item, files) {
         let that = $(item);
@@ -314,7 +322,15 @@
                 return;
             }
             orderInfo["serviceProviderCode"] = thisServCompanyData.companyCode;
-            orderInfo["outsourceFlag"] = "0"
+            console.log("thisServCompanyData.bindFlag");
+            console.log(thisServCompanyData.bindFlag);
+            if (thisServCompanyData.bindFlag === "1") {
+                console.log("thisServCompanyData.bindFlag===1");
+                orderInfo["outsourceFlag"] = "1";
+            } else if (thisServCompanyData.bindFlag === "2") {
+                console.log("thisServCompanyData.bindFlag===2");
+                orderInfo["outsourceFlag"] = "0";
+            }
         }
         if (thisEmployeeInfo == null || thisEmployeeInfo === undefined) {
             utils.Toast("", "当前登陆失效", "");
@@ -350,10 +366,13 @@
         orderInfo["tempCategoryId"] = thisSlaInfo.tempCategoryId;
         orderInfo["currentUserId"] = thisEmployeeInfo.employeeId;
         orderInfo["title"] = absDescribe.val();
+
         request.sendWokOrder(cache.getCompanyType(), orderInfo, function (result) {
             utils.Toast("", "工单发送成功！", "");
-            sessionStorage.clear();
-            location.replace("order.html")
+            setTimeout(function () {
+                sessionStorage.clear();
+                location.replace("order.html")
+            },1500)
         });
         return orderInfo;
     }

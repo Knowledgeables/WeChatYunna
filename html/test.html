@@ -1,39 +1,56 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/rem.js"></script>
-    <script src="../js/utils.js"></script>
-    <script src="../js/popups.js"></script>
-    <script src="../js/request.js"></script>
-    <script src="../js/cache.js"></script>
-    <script src="../js/api.js"></script>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>无标题页</title>
+    <style type="text/css">
+        .fixDiv {
+            background-color: #f0f0f0;
+            border: solid 1px #000000;
+            position: absolute;
+            display: none;
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+    <script type="text/javascript" language="javascript" src="../js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //动画速度  
+            var speed = 700;
+
+            $("#btnShow").mouseover(function (event) {
+                //取消事件冒泡  
+                event.stopPropagation();
+                //设置弹出层位置  
+                var offset = $(event.target).offset();
+                $("#divPop").css({
+                    top: offset.top + $(event.target).height() + "px",
+                    left: offset.left
+                });
+                //切换弹出层的显示状态  
+                $("#divPop").toggle(speed);
+                $("#divPop").html("在按纽<font color=\"red\">下</font>方弹出层");
+            });
+
+            $("#btnUpShow").mouseover(function (event) {
+                var w = $(this).offset().left, h = $(this).offset().top, dh = $("#divPop").height();
+                $("#divPop").css({top: h - dh + "px", left: w});
+                $("#divPop").toggle(speed);
+                $("#divPop").html("在按纽<font color=\"blue\">上</font>方弹出层");
+            });
+        });
+    </script>
 </head>
 <body>
-<button class="save" onclick="clickSave()">点击存储</button>
-<button class="read" onclick="clickRead()">点击读取</button>
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<input type="button" id="btnShow" value="弹出层"/><input type="button" id="btnUpShow" value="弹出层"
+                                                      style="float:left; margin-left:300px;"/>
+<div id="divPop" class="fixDiv"></div>
 </body>
-<script>
-    let  btnRead=$(".read");
-    let  btnSave=$(".save");
-    window.onload = function () {
-        btnSave.append("--nihao加载")
-
-    };
-
-    function clickSave() {
-        localStorage.setItem("name", "你好我叫陈滨");
-    }
-
-    function clickRead() {
-        btnRead.append(localStorage.getItem("name"));
-
-    }
-</script>
-</html>
+</html>  

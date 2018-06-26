@@ -165,7 +165,7 @@ input:disabled {
 
 .left_detail {
     margin-top: .2rem;
-    height: 2rem;
+    height: 3rem;
     background: rgba(255, 255, 255, 1);
     padding-bottom: .05rem;
     box-shadow: 1px 1px 1px rgb(179, 179, 179);
@@ -175,7 +175,7 @@ input:disabled {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    height: 2rem;
+    height: 3rem;
 }
 
 .abstract_describe p {
@@ -186,9 +186,10 @@ input:disabled {
 }
 
 .abs_describe {
-    height: 1rem;
+    height: 2rem;
     width: 100%;
     line-break: auto;
+    text-align: left;
 }
 
 .footer {
