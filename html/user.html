@@ -35,8 +35,10 @@
 </body>
 <script>
     let currentEmployeeInfo = cache.getEmployeeInfo();
+    let thisType;
     window.onload =
         function () {
+            thisType = cache.getCompanyType();
             console.log("公司信息");
             console.log(currentEmployeeInfo);
             let name = currentEmployeeInfo.name == null ? "" : currentEmployeeInfo.name;
@@ -46,8 +48,7 @@
         };
 
     function logOutClick() {
-        sessionStorage.clear();
-        localStorage.clear();
+        cache.clearInfo();
         location.replace("login.html")
     }
 

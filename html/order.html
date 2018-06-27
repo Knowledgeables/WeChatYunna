@@ -366,13 +366,12 @@
         orderInfo["tempCategoryId"] = thisSlaInfo.tempCategoryId;
         orderInfo["currentUserId"] = thisEmployeeInfo.employeeId;
         orderInfo["title"] = absDescribe.val();
-
         request.sendWokOrder(cache.getCompanyType(), orderInfo, function (result) {
             utils.Toast("", "工单发送成功！", "");
             setTimeout(function () {
                 sessionStorage.clear();
                 location.replace("order.html")
-            },1500)
+            }, 1500)
         });
         return orderInfo;
     }

@@ -6,7 +6,7 @@
     }
 
     function jumpLogin() {
-       // window.location.href = "login.html";
+        // window.location.href = "login.html";
     }
 
 
@@ -123,6 +123,14 @@
     }
 
 
+    function clearInfo() {
+        localStorage.removeItem("serviceInfo");
+        localStorage.removeItem("ownerInfo");
+        localStorage.removeItem("currentCompanyInfo");
+        localStorage.removeItem("currentEmployeeInfo");
+        sessionStorage.clear();
+    }
+
 
     window.cache =
         {
@@ -136,6 +144,7 @@
             setCompanyInfo: setCompanyInfo,
             getCompanyInfo: getCompanyInfo,
             setEmployeeInfo: setEmployeeInfo,
-            getEmployeeInfo: getEmployeeInfo
+            getEmployeeInfo: getEmployeeInfo,
+            clearInfo: clearInfo
         };
 })();
