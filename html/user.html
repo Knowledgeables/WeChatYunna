@@ -34,15 +34,15 @@
 </div>
 </body>
 <script>
-    let currentEmployeeInfo = cache.getEmployeeInfo();
-    let thisType;
+    var currentEmployeeInfo = cache.getEmployeeInfo();
+    var thisType;
     window.onload =
         function () {
             thisType = cache.getCompanyType();
             console.log("公司信息");
             console.log(currentEmployeeInfo);
-            let name = currentEmployeeInfo.name == null ? "" : currentEmployeeInfo.name;
-            let mobilePhone = currentEmployeeInfo.mobilePhone == null ? "" : currentEmployeeInfo.mobilePhone;
+            var name = currentEmployeeInfo.name == null ? "" : currentEmployeeInfo.name;
+            var mobilePhone = currentEmployeeInfo.mobilePhone == null ? "" : currentEmployeeInfo.mobilePhone;
             $("#userName").html(name);
             $("#userPhone").html(mobilePhone);
         };

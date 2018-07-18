@@ -26,14 +26,14 @@
 </div>
 </body>
 <script>
-    let currentType;
+    var currentType;
     window.onload = function () {
         currentType = utils.GetQueryString("type");
         console.log("当前类型");
         console.log(currentType);
         request.reqCompanyInfo("", function (companyList) {
             $(companyList).each(function (i, item) {
-                let itemIndex = "item" + i;
+                var itemIndex = "item" + i;
                 $(".container").append("  <div class=\"item\"  id=" + itemIndex + "   data-content=" + JSON.stringify(item) + "  onclick='itemClick(this)'>\n" +
                     "        <div class=\"item_icon\">\n" + item.serverName.substring(0, 1) +
                     "        </div>\n" +
@@ -42,10 +42,10 @@
                     "            <img  class=\"item_type\" src=\"..\\image\\icon_company_hyfws.png\">\n" +
                     "        </div>\n" +
                     "    </div>");
-                let thisItem = $(`#${itemIndex}`);
-                let icon = thisItem.children(".item_icon");
-                let iconType = thisItem.children(".item_center").children(".item_type");
-                let companyType = cache.getCompanyType();
+                var thisItem = $(`#${itemIndex}`);
+                var icon = thisItem.children(".item_icon");
+                var iconType = thisItem.children(".item_center").children(".item_type");
+                var companyType = cache.getCompanyType();
                 if ("1" === item.bindFlag) {
                     console.log("item.bindFlag==1");
                     if ("owner" === companyType) {

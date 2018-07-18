@@ -31,8 +31,8 @@
 <script>
     window.onload =
         function () {
-            let reqCompany_data = JSON.parse(sessionStorage.getItem("reqCompany"));
-            let thisCompanyData = cache.getEmployeeInfo();
+            var reqCompany_data = JSON.parse(sessionStorage.getItem("reqCompany"));
+            var thisCompanyData = cache.getEmployeeInfo();
             console.log("reqCompany_data");
             console.log(reqCompany_data);
             console.log("thisCompanyData");
@@ -40,7 +40,7 @@
             request.reqOrderPerson(reqCompany_data.companyCode, thisCompanyData.serviceProviderCode, function (companyList) {
                 $(companyList).each(function (i, item) {
                     console.log(item.avatar == null);
-                    let imageSrc = item.avatar == null ? "../image/icon_header_default.png" : item.avatar;
+                    var imageSrc = item.avatar == null ? "../image/icon_header_default.png" : item.avatar;
                     $(".container").append("<div class=\"item\"  id=" + JSON.stringify(item) + " onclick='itemClick(this)'>\n" +
                         "        <div class=\"item_icon\">\n" +
                         "            <img src=" + imageSrc + "  width='100%' height='100%'/>\n" +
@@ -57,7 +57,7 @@
 
 
     function itemClick(item) {
-        let data = $(item).attr("id");
+        var data = $(item).attr("id");
         sessionStorage.setItem("reqPerson", data);
         window.location.href = "order.html";
     }

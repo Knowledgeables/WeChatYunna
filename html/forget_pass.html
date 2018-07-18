@@ -45,7 +45,7 @@
 </div>
 </body>
 <script>
-    let currentEmployeeInfo = cache.getEmployeeInfo();
+    var currentEmployeeInfo = cache.getEmployeeInfo();
     window.onload = function () {
 
     };
@@ -57,7 +57,7 @@
     }
 
     function getCode() {
-        let phone = $(".phoneNumber").val();
+        var phone = $(".phoneNumber").val();
         if (phone === null || phone.length === 0) {
             utils.Toast("", "手机号不能为空", "");
             return;
@@ -81,10 +81,10 @@
 
 
     function sureClick() {
-        let phone = $(".phoneNumber").val();
-        let vercode = $(".vercode_text").val();
-        let pass = $(".pass").val();
-        let newPass = $(".newPass").val();
+        var phone = $(".phoneNumber").val();
+        var vercode = $(".vercode_text").val();
+        var pass = $(".pass").val();
+        var newPass = $(".newPass").val();
         if (phone === null || phone.length === 0) {
             console.log("phone");
             console.log(phone);
@@ -139,7 +139,7 @@
         });
     }
 
-    let countdown = 60;
+    var countdown = 60;
 
     function settime(val) {
         if (countdown === 0) {

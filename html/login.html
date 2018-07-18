@@ -41,10 +41,10 @@
     </div>
 </div>
 <script>
-    let sp_service = $("#service");
-    let sp_owner = $("#owner");
-    let in_userName = $("#userName");
-    let in_userPwd = $("#userPwd");
+    var sp_service = $("#service");
+    var sp_owner = $("#owner");
+    var in_userName = $("#userName");
+    var in_userPwd = $("#userPwd");
     window.onload = function () {
         refreshCurrentSelectCompny();
     };
@@ -57,7 +57,7 @@
             case "service":
                 sp_service.addClass("company_select");
                 sp_owner.removeClass("company_select");
-                let service = cache.getServiceUserInfo();
+                var service = cache.getServiceUserInfo();
                 if (service != null) {
                     in_userName.val(service.userName == null ? "" : service.userName);
                     in_userPwd.val(service.password == null ? "" : service.password);
@@ -69,7 +69,7 @@
             case "owner":
                 sp_owner.addClass("company_select");
                 sp_service.removeClass("company_select");
-                let owner = cache.getOwnerUserInfo();
+                var owner = cache.getOwnerUserInfo();
                 if (owner != null) {
                     in_userName.val(owner.userName == null ? "" : owner.userName);
                     in_userPwd.val(owner.password == null ? "" : owner.password);

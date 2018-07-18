@@ -92,26 +92,26 @@
 </div>
 </body>
 <script>
-    let tab1 = $("#tab1");
-    let tab2 = $("#tab2");
-    let left = $(".left");
-    let right = $(".right");
-    let project = $(".left_project");
-    let reqCompany = $(".sp_reqCompany");
-    let reqPerson = $(".sp_reqPerson");
-    let servCompany = $(".sp_servCompany");
-    let icReqCompany = $(".ic_req_company");
-    let icReqPerson = $(".ic_req_person");
-    let icServCompany = $(".ic_serv_company");
-    let slaDay = $(".sla_day");
-    let slaTime = $(".sla_time");
-    let sla_box = $(".sla_box");
-    let absDescribe = $(".abs_describe");
-    let thisReqCompanyData;//请求公司信息
-    let thisReqPersonData;//请求用户信息
-    let thisServCompanyData;//服务企业信息
-    let thisEmployeeInfo;//当前企业信息
-    let thisSlaInfo;//当前sla信息
+    var tab1 = $("#tab1");
+    var tab2 = $("#tab2");
+    var left = $(".left");
+    var right = $(".right");
+    var project = $(".left_project");
+    var reqCompany = $(".sp_reqCompany");
+    var reqPerson = $(".sp_reqPerson");
+    var servCompany = $(".sp_servCompany");
+    var icReqCompany = $(".ic_req_company");
+    var icReqPerson = $(".ic_req_person");
+    var icServCompany = $(".ic_serv_company");
+    var slaDay = $(".sla_day");
+    var slaTime = $(".sla_time");
+    var sla_box = $(".sla_box");
+    var absDescribe = $(".abs_describe");
+    var thisReqCompanyData;//请求公司信息
+    var thisReqPersonData;//请求用户信息
+    var thisServCompanyData;//服务企业信息
+    var thisEmployeeInfo;//当前企业信息
+    var thisSlaInfo;//当前sla信息
     /**
      * 页面加载事件
      */
@@ -142,7 +142,7 @@
             if (thisReqPersonData != null) {
                 console.log(thisReqPersonData.name);//用户名
                 console.log(thisReqPersonData.mobilePhone);//手机号
-                let tempName = (thisReqPersonData.name == null ? "" : thisReqPersonData.name) + "-" + (thisReqPersonData.mobilePhone == null ? "" : thisReqPersonData.mobilePhone);
+                var tempName = (thisReqPersonData.name == null ? "" : thisReqPersonData.name) + "-" + (thisReqPersonData.mobilePhone == null ? "" : thisReqPersonData.mobilePhone);
                 reqPerson.val(tempName);//设置请求人信息
             } else {
                 reqPerson.val("");//设置请求人信息
@@ -197,7 +197,7 @@
     reqCompany.click(function () {
         sessionStorage.removeItem("reqPerson");
         thisReqPersonData = null;
-        let target = cache.getCompanyType() === "service" ? "req" : "serv";
+        var target = cache.getCompanyType() === "service" ? "req" : "serv";
         window.location = "reqCompany.html?type=" + target;
     });
     reqPerson.click(function () {
@@ -208,7 +208,7 @@
         window.location = "reqPerson.html";
     });
     servCompany.click(function () {
-        let target = cache.getCompanyType() === "service" ? "req" : "serv";
+        var target = cache.getCompanyType() === "service" ? "req" : "serv";
         window.location = "reqCompany.html?type=" + target;
     });
 
@@ -242,9 +242,9 @@
 
     //获取图片并显示
     function handleFiles(item, files) {
-        let that = $(item);
-        for (let i = 0; i < files.length; i++) {
-            let file = files[i];
+        var that = $(item);
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
             if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/gif') {
                 utils.Toast("", "不是有效的图片文件", "");
                 return;
@@ -254,8 +254,8 @@
                 "                <button class=\"imageDel\" type=\"button\"\n" +
                 "                        onclick=\"delClick(this)\"></button>\n" +
                 "            </div>");
-            let image = $(".chooseDiv").prev().children(".imageShow");
-            let reader = new FileReader();
+            var image = $(".chooseDiv").prev().children(".imageShow");
+            var reader = new FileReader();
             reader.onload = function (e) {
                 image.attr("src", e.target.result);
             };
@@ -290,7 +290,7 @@
      }*/
 
     function senWork() {
-        let orderInfo = {
+        var orderInfo = {
             title: null,
             ownerCode: null,
             sendUser: null,
@@ -347,9 +347,9 @@
         $(".imageShow").each(function (index, item) {
             console.log("条目");
             console.log(item.id);
-            let attachName = JSON.parse(item.id).attachName;
-            let path = JSON.parse(item.id).path;
-            let size = JSON.parse(item.id).size;
+            var attachName = JSON.parse(item.id).attachName;
+            var path = JSON.parse(item.id).path;
+            var size = JSON.parse(item.id).size;
             if (index === 0) {
                 orderInfo["filenames"] = attachName;
                 orderInfo["attachPath"] = path;
