@@ -78,7 +78,7 @@
             <div class="chooseDiv">
                 <button class="captureBtn" type="button" onclick="chooseClick(this)"></button>
                 <input class="captureInput" style="display: none" type="file"
-                       accept="image/png, image/jpeg , image/jpg"
+                       accept="image/png, image/jpeg , image/jpg ,audio/mpeg ,video/mp4"
                        onchange="handleFiles(this,this.files)"/>
             </div>
         </div>
@@ -245,8 +245,8 @@
         var that = $(item);
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'image/gif') {
-                utils.Toast("", "不是有效的图片文件", "");
+            if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'video/mp4' && file.type !== 'audio/mpeg') {
+                utils.Toast("", "不是有效的文件", "");
                 return;
             }
             that.parent(".chooseDiv").before("<div class=\"imageShowDiv\">\n" +
@@ -261,33 +261,15 @@
             };
             reader.readAsDataURL(file);
             console.log("图片的路径" + image[0].src);
-            request.upLoadFile(cache.getCompanyType(), cache.getCompanyInfo().versionCode, cache.getCompanyInfo().companyCode, file, function (result) {
+            request.upLoadFile(cache.getCompanyType(), cache.getCompanyInfo().versionCode, cache.getCompanyInfo().companyCode, file, function (progress) {
+                console.log(progress);
+            }, function (result) {
                 console.log(JSON.stringify(result));
                 console.log(result.path);
                 image.attr("id", JSON.stringify(result));
             });
         }
     }
-
-    /* //获取全部图片列表
-     function getAllImage2Upload() {
-         let images = {
-             "item_attachName": "",
-             "item_path": "",
-             "item_size": ""
-         };
-         $(".imageShow").each(function (index, item) {
-             console.log("条目");
-             console.log(item.id);
-             let attachName = JSON.parse(item.id).attachName;
-             let path = JSON.parse(item.id).path;
-             let size = JSON.parse(item.id).size;
-             images["item_attachName"] = images.item_attachName + "," + attachName;
-             images["item_path"] = images.item_path + "," + path;
-             images["item_size"] = images.item_size + "," + size;
-         });
-         return images;
-     }*/
 
     function senWork() {
         var orderInfo = {

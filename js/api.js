@@ -34,8 +34,8 @@ var SERVICE_SEND_ORDER = SERVER + "appRebuildRequestServerLimit.htm";
 var OWNER_SEND_ORDER   = OWNER + "appRebuildRequestServerLimit.htm";
 
 //发起工单-上传附件
-var SERVICE_UPLOAD_FILE = SERVICE_FILE + "appUploadFile.htm";
-var OWNER_UPLOAD_FILE = OWNER_FILE + "appUploadFile.htm";
+var SERVICE_UPLOAD_FILE = SERVICE_FILE + "appUploadFileVideoOrAudio.htm";
+var OWNER_UPLOAD_FILE = OWNER_FILE + "appUploadFileVideoOrAudio.htm";
 
 //忘记密码验证码那
 var SERVICE_SEND_CODE = SERVER + "sendVercode.htm";

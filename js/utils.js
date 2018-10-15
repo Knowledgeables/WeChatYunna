@@ -36,7 +36,7 @@
 
 
     //ajax请求上传文件
-    function ajaxFile(requestUrl, requestParams, callback) {
+    function ajaxFile(requestUrl, requestParams, progress,callback) {
         console.log("-----------------------------------------------------");
         console.log("请求接口地址：" + requestUrl);
         console.log("请求入参：");
@@ -56,8 +56,22 @@
             error: function (err) {
                 console.log("系统繁忙" + JSON.stringify(err));
             }
+            ,
+            xhr: function () {
+                myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // check if upload property exists
+                    myXhr.upload.addEventListener('progress', function (e) {
+                        var loaded = e.loaded;                  //已经上传大小情况
+                        var total = e.total;                      //附件总大小
+                        var percent = Math.floor(100 * loaded / total) + "%";     //已经上传的百分比
+                        return progress(percent);
+                    }, false); // for handling the progress of the upload
+                }
+                return myXhr;
+            },
         });
     }
+
 
     /**
      *
@@ -93,7 +107,7 @@
      */
     function validatePwd(content) {
         console.log("pwd--" + content.length);
-        return content !== undefined && content.length > 6 && content.length < 24;
+        return content !== undefined && content.length >= 6 && content.length < 24;
     }
 
 

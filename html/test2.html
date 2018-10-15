@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<button onclick="load()">加载</button>
+<body>
+<script>
+    function load() {
+
+        var  json="{\n" +
+            "  \"Code\": \"1000\",\n" +
+            "  \"Data\": [\n" +
+            "      {\n" +
+            "    \"coverImage\": \"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052228484160.jpg\",\n" +
+            "    \"detail\": \"<p class=\\\"MsoNormal\\\">  <span style=\\\"font-size:32px;\\\">买家注意：</span><span style=\\\"font-size:32px;\\\">西藏，青海，甘肃，新疆，宁夏，内蒙、海南、东北三省不发货，售后电话：</span><span style=\\\"font-size:32px;\\\">19923603239，由于核桃不打任何的农药，可能个别会出现虫子，介意者慎拍！！！！</span> </p> <p class=\\\"MsoNormal\\\">  <span style=\\\"font-size:32px;\\\"><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231185905.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231198718.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231206375.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231214344.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231221062.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231226687.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231235281.png\\\" alt=\\\"\\\" /><br /> </span> </p>\",\n" +
+            "    \"images\": {\n" +
+            "      \"-xmlns:d3p1\": \"http://schemas.microsoft.com/2003/10/Serialization/Arrays\",\n" +
+            "      \"d3p1:string\": \"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052229402762.jpg\"\n" +
+            "    },\n" +
+            "    \"isFreightFree\": \"true\",\n" +
+            "    \"isHot\": \"0\",\n" +
+            "    \"marketPrice\": \"98.00\",\n" +
+            "    \"memberPrice\": \"84.50\",\n" +
+            "    \"producId\": \"3147171\",\n" +
+            "    \"productName\": \"云南薄皮核桃5斤\",\n" +
+            "    \"sellCount\": \"15\",\n" +
+            "    \"sellPrice\": \"84.50\",\n" +
+            "    \"shareImage\": \"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/shared/201807/05/201807052228484160_150_150.jpg\",\n" +
+            "    \"stock\": \"485\",\n" +
+            "    \"storeId\": \"0\"\n" +
+            "    },\n" +
+            "    {\n" +
+            "    \"coverImage\": \"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052228484160.jpg\",\n" +
+            "    \"detail\": \"<p class=\\\"MsoNormal\\\">  <span style=\\\"font-size:32px;\\\">买家注意：</span><span style=\\\"font-size:32px;\\\">西藏，青海，甘肃，新疆，宁夏，内蒙、海南、东北三省不发货，售后电话：</span><span style=\\\"font-size:32px;\\\">19923603239，由于核桃不打任何的农药，可能个别会出现虫子，介意者慎拍！！！！</span> </p> <p class=\\\"MsoNormal\\\">  <span style=\\\"font-size:32px;\\\"><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231185905.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231198718.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231206375.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231214344.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231221062.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231226687.png\\\" alt=\\\"\\\" /><img src=\\\"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052231235281.png\\\" alt=\\\"\\\" /><br /> </span> </p>\",\n" +
+            "    \"images\": {\n" +
+            "      \"-xmlns:d3p1\": \"http://schemas.microsoft.com/2003/10/Serialization/Arrays\",\n" +
+            "      \"d3p1:string\": \"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/201807/05/201807052229402762.jpg\"\n" +
+            "    },\n" +
+            "    \"isFreightFree\": \"true\",\n" +
+            "    \"isHot\": \"0\",\n" +
+            "    \"marketPrice\": \"98.00\",\n" +
+            "    \"memberPrice\": \"84.50\",\n" +
+            "    \"producId\": \"3147171\",\n" +
+            "    \"productName\": \"云南薄皮核桃5斤\",\n" +
+            "    \"sellCount\": \"15\",\n" +
+            "    \"sellPrice\": \"84.50\",\n" +
+            "    \"shareImage\": \"https://vpclub-img.oss-cn-shenzhen.aliyuncs.com/upload/88888888/shared/201807/05/201807052228484160_150_150.jpg\",\n" +
+            "    \"stock\": \"485\",\n" +
+            "    \"storeId\": \"0\"\n" +
+            "    }\n" +
+            "  ],\n" +
+            "  \"Message\": \"成功\"\n" +
+            "}";
+        console.log("json的类型")
+        console.log(typeof JSON.parse(json));
+        console.log(json);
+
+
+    }
+</script>
+</body>
+</html>

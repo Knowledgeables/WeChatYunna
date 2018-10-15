@@ -188,7 +188,7 @@
             });
         }
 
-        function upLoadFile(companyType, versionCode, companyCode, file, call) {
+        function upLoadFile(companyType, versionCode, companyCode, file, progress, call) {
             let url;
             if (companyType === "service") {
                 url = SERVICE_UPLOAD_FILE;
@@ -205,7 +205,9 @@
             file_data.append("fileuploadFileName", file.name);
             file_data.append("fileupload", file);
             file_data.append("isControl", '1');
-            utils.AjaxFile(url, file_data, function (result) {
+            utils.AjaxFile(url, file_data, function(msg) {
+                progress(msg);
+            }, function(result) {
                 if (result != null && result.attachName != null && result.msg === "上传成功！") {
                     call(result);
                 } else {
