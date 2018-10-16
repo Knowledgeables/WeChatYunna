@@ -70,15 +70,35 @@
     </div>
     <div class="right">
         <div class="imageBox">
-            <!--<div class="imageShowDiv">
-                <img class="imageShow" src="../image/ic_girl.png"/>
+            <div class="imageShowDiv">
+                <img class="imageShow"/>
                 <button class="imageDel" type="button"
                         onclick="delClick(this)"></button>
-            </div>-->
+            </div>
             <div class="chooseDiv">
                 <button class="captureBtn" type="button" onclick="chooseClick(this)"></button>
                 <input class="captureInput" style="display: none" type="file"
                        accept="image/png, image/jpeg , image/jpg ,audio/mpeg ,video/mp4"
+                       onchange="handleFiles(this,this.files)"/>
+            </div>
+        </div>
+        <div class="rightBottom" style="pointer-events: auto">
+            <div class="chooseDiv">
+                <button class="captureBtn" type="button" onclick="chooseClick(this)"></button>
+                <input class="captureInput" style="display: none" type="file"
+                       accept="image/* ,audio/mpeg ,video/mp4"
+                       onchange="handleFiles(this,this.files)"/>
+            </div>
+            <div class="chooseDiv">
+                <button class="captureBtn" type="button" onclick="chooseClick(this)"></button>
+                <input class="captureInput" style="display: none" type="file"
+                       accept="image/* ,audio/mpeg ,video/mp4"
+                       onchange="handleFiles(this,this.files)"/>
+            </div>
+            <div class="chooseDiv">
+                <button class="captureBtn" type="button" onclick="chooseClick(this)"></button>
+                <input class="captureInput" style="display: none" type="file"
+                       accept="image/*, ,audio/mpeg ,video/mp4"
                        onchange="handleFiles(this,this.files)"/>
             </div>
         </div>
@@ -236,7 +256,7 @@
     }
 
     function textareaInput() {
-        console.log("dianji")
+        console.log("dianji");
         absDescribe.focus();
     }
 
@@ -245,7 +265,7 @@
         var that = $(item);
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image/png' && file.type !== 'video/mp4' && file.type !== 'audio/mpeg') {
+            if (file.type !== 'image/png' && file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'audio/mpeg' && file.type !== 'video/mp4' && file.type !== 'audio/mp3') {
                 utils.Toast("", "不是有效的文件", "");
                 return;
             }
