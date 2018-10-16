@@ -1,0 +1,114 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+.parent {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #EDF0F5;
+}
+
+/*顶部*/
+.header {
+    display: flex;
+    width: 100%;
+    height: .9rem;
+    max-height: 8%;
+    background: rgba(255, 255, 255, 1);
+}
+
+.tab {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: .9rem;
+    font-family: PingFang-SC-Regular, serif;
+    color: rgba(102, 102, 102, 1);
+    background: rgba(255, 255, 255, 1);
+    padding-bottom: .05rem;
+    box-shadow: 1px 1px 1px rgb(179, 179, 179);
+}
+
+.selected {
+    border-bottom: .04rem solid rgba(104, 157, 248, 1);
+    color: rgba(104, 157, 248, 1);
+}
+
+.swiper-container {
+    height: 80%;
+    width: 100%;
+}
+
+.item {
+    height: 100%;
+    width: 98%;
+    background-color: blue;
+    margin: 0 auto;
+}
+
+.item {
+    height: 100%;
+    width: 98%;
+    background-color: rebeccapurple;
+    margin: 0 auto;
+}
+
+/*个人中心*/
+.person {
+    width: 96%;
+    height: 2.2rem;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: center; /*指定垂直居中*/
+    z-index: 9999;
+    position: absolute;
+    bottom: 1.3rem; /* 关键 */
+    padding-right: .3rem;
+}
+
+.person_header {
+    width: 1rem;
+    float: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/*底部*/
+.footer {
+    height: 1.3rem;
+    width: 100%;
+    max-height: 11%;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex; /*Flex布局*/
+    display: -webkit-flex; /* Safari */
+    align-items: center; /*指定垂直居中*/
+    position: absolute;
+    bottom: 0; /* 关键 */
+    left: 0; /* IE下一定要记得 */
+}
+
+.footer button {
+    height: 1rem;
+    background: rgba(104, 157, 248, 1);
+    border-radius: .1rem;
+    box-shadow: .05rem 0 .05rem rgba(104, 157, 248, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    font-size: .38rem;
+    font-family: PingFang-SC-Bold, serif;
+    color: rgba(255, 255, 255, 1);
+}

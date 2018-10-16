@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发起工单</title>
+    <script src="../js/api.js"></script>
+    <script src="../js/cache.js"></script>
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/popups.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/utils.js"></script>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/newOrder.css">
+    <link rel="stylesheet" href="../css/swiper4.0.css">
+    <script src="../js/swiper4.0.js"></script>
+</head>
+<body>
+<div class="parent">
+    <div class="header">
+        <div id="tab1" class="tab selected" data-tag="0">基本信息</div>
+        <div id="tab2" class="tab" data-tag="1">添加附件</div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide item">
+            </div>
+            <div class="swiper-slide item" style="background-color: red">
+            </div>
+        </div>
+    </div>
+    <div class="person">
+        <img class="person_header" src="../image/ic_user_header.png" onclick="userInfoClick()">
+    </div>
+    <div class="footer">
+        <button onclick="senWork()">发起</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var swiper;
+    $(function () {
+        var tab1 = $("#tab1");
+        var tab2 = $("#tab2");
+        swiper = new Swiper('.swiper-container', {
+            autoplay: false,//可选选项，自动滑动
+            on: {
+                init: function () {
+                    //Swiper初始化了
+                    alert('当前的slide序号是' + this.activeIndex);
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                slideChangeTransitionStart: function () {
+                    console.log(this.activeIndex);
+                    switch (this.activeIndex) {
+                        case 0:
+                            tab1.addClass("selected");
+                            tab2.removeClass("selected");
+                            break;
+                        case 1:
+                            tab2.addClass("selected");
+                            tab1.removeClass("selected");
+                            break;
+                    }
+                },
+            },
+        });
+    });//end
+    $(".tab").on("click", function (event) {
+        swiper.slideTo(event.currentTarget.dataset.tag);
+    });
+</script>
+
+</body>
+</html>

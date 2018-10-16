@@ -1,13 +1,20 @@
 
+body {
+    background: rgba(237, 240, 245, 1);
+}
+
+.parent {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
 .header {
     display: flex;
     width: 100%;
     height: .9rem;
+    max-height: 8%;
     background: rgba(255, 255, 255, 1);
-}
-
-body {
-    background: rgba(237, 240, 245, 1);
 }
 
 .tab {
@@ -256,6 +263,7 @@ input:disabled {
 .right {
     background-color: rgba(237, 240, 245, 1);
     padding-top: .15rem;
+    height: 100%;
     position: relative;
 
 }
@@ -331,6 +339,7 @@ input:disabled {
     bottom: 0; /* 关键 */
     left: 0; /* IE下一定要记得 */
 }
+
 .rightOpt {
     margin-top: .2rem;
     width: 28%;
